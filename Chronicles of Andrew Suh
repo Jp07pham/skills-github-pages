@@ -1,0 +1,86 @@
+import time
+import random
+
+def roll_dice(sides=20):
+    return random.randint(1, sides)
+
+def start_game():
+    print("Welcome to the Medieval Adventure of Andrew Suh!")
+    print("You are Andrew Suh, a young noble who must navigate the treacherous world of medieval politics and war.")
+    print("One day, you are summoned by the King for a secret mission.")
+    choice = input("Do you accept the mission or decline? (accept/decline): ").strip().lower()
+    
+    if choice == "accept":
+        royal_mission()
+    elif choice == "decline":
+        print("You choose a quiet life, but you are soon forgotten. The End.")
+    else:
+        print("Invalid choice. Try again.")
+        start_game()
+
+def royal_mission():
+    print("The King tasks you with delivering a sealed letter to a neighboring kingdom. On your journey, you are ambushed by bandits!")
+    print("Rolling a D20 dice to determine the outcome...")
+    roll = roll_dice(20)
+    print(f"You rolled a {roll}!")
+    
+    if roll == 20:
+        print("Critical success! You effortlessly defeat the bandits and gain valuable loot!")
+        side_story_tavern()
+    elif roll > 12:
+        print("You bravely defeat the bandits and continue your mission!")
+        side_story_forest()
+    elif roll == 1:
+        print("Critical failure! You trip over your own sword and are captured instantly. The End.")
+    else:
+        print("The bandits overpower you. You are captured. The End.")
+
+def side_story_tavern():
+    print("You stop by a local tavern and hear rumors of a mighty dragon terrorizing the lands.")
+    choice = input("Do you investigate the dragon or continue your mission? (investigate/continue): ").strip().lower()
+    
+    if choice == "investigate":
+        dragon_encounter()
+    else:
+        castle_arrival()
+
+def side_story_forest():
+    print("You wander through a dense forest and stumble upon an old friend, your lost companion!")
+    print("They join you on your journey.")
+    castle_arrival()
+
+def dragon_encounter():
+    print("You find the dragon's lair and prepare for battle!")
+    print("Rolling a D20 dice to determine the outcome...")
+    roll = roll_dice(20)
+    print(f"You rolled a {roll}!")
+    
+    if roll == 20:
+        print("Critical success! You slay the dragon with a single strike and find powerful treasure!")
+        castle_arrival()
+    elif roll > 10:
+        print("You fight bravely and manage to defeat the dragon, but you're injured.")
+        castle_arrival()
+    elif roll == 1:
+        print("Critical failure! The dragon incinerates you with a single breath. The End.")
+    else:
+        print("The dragon is too strong. You barely escape with your life. You return to your mission.")
+        castle_arrival()
+
+def castle_arrival():
+    print("You arrive at the neighboring kingdom, but the guards are suspicious.")
+    print("Rolling a D6 dice to determine persuasion...")
+    roll = roll_dice(6)
+    print(f"You rolled a {roll}!")
+    
+    if roll == 6:
+        print("Critical success! The guards welcome you with open arms and grant you an audience with the King. You win!")
+    elif roll > 3:
+        print("Your words convince the guards, and they allow you in. You successfully deliver the letter. You win!")
+    elif roll == 1:
+        print("Critical failure! You accidentally insult the guards and are immediately thrown into the dungeon. The End.")
+    else:
+        print("The guards arrest you, thinking you're a spy. You are thrown into the dungeon. The End.")
+
+if __name__ == "__main__":
+    start_game()
